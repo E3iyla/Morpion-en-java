@@ -20,18 +20,18 @@ public class PlayWave extends Thread {
     }
 
     public void run() {
-        // si le fichier existe
-        File soundFile = new File(filename);
-        System.out.println("Je cherche le fichier ici : " + soundFile.getAbsolutePath());
-
-        if(!soundFile.exists()){
-            System.err.println ("Wave file not found: " + filename);
+        java.net.URL soundURL= getClass().getResource("/"+ filename);
+        if(soundURL== null){
+            System.err.println ("Fichier son introuvable dans le JAR : " + filename);
             return;
         }
 
-        AudioInputStream audioInputStream = null;
+        System.out.println("Fichier trouvé : " + soundUrl);
+
+        AudioInputSysteme audioInputStream = null; 
+        
         try{
-            audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+            audioInputStream = AudioSystem.getAudioInputStream(soundURL);
         }catch (UnsupportedAudioFileException e1) {
             e1.printStackTrace();
             return;
@@ -39,7 +39,7 @@ public class PlayWave extends Thread {
             e1.printStackTrace();
             return;
         }
-
+        
         AudioFormat format = audioInputStream.getFormat(); // recup le format du son
         SourceDataLine auline = null;
         DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
