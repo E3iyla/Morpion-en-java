@@ -26,9 +26,9 @@ public class PlayWave extends Thread {
             return;
         }
 
-        System.out.println("Fichier trouvé : " + soundUrl);
+        System.out.println("Fichier trouvé : " + soundURL);
 
-        AudioInputSysteme audioInputStream = null; 
+        AudioInputSystem audioInputStream = null; 
         
         try{
             audioInputStream = AudioSystem.getAudioInputStream(soundURL);
